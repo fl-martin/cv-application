@@ -3,9 +3,11 @@ import React, { Component } from "react";
 class Employ extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			employ: { data: "", editing: true },
+		};
 	}
 	render() {
-		console.log(this.props.employList);
 		if (this.props.employList) {
 			const employList = this.props.employList.map((element, index) => {
 				<li key={index}>
@@ -19,7 +21,10 @@ class Employ extends Component {
 				</li>;
 			});
 			return employList;
-		} else return null;
+		}
+		if (this.props.addingEmploy) {
+			return <div>component form employ</div>;
+		}
 	}
 }
 

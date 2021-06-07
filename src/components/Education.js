@@ -9,7 +9,13 @@ class Education extends Component {
 		};
 	}
 	render() {
-		return <div></div>;
+		return (
+			<div>
+				<h3>
+					<i className="fas fa-pen-square"> Education</i>
+				</h3>
+			</div>
+		);
 	}
 }
 

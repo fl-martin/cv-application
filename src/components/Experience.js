@@ -12,9 +12,26 @@ class Experience extends Component {
 				year_end: "",
 				description: "",
 			},
+			addingEmploy: true,
 			employArray: [],
 		};
+		this.addEmploy = this.addEmploy.bind(this);
+		this.saveEmploy = this.saveEmploy.bind(this);
+		this.removeEmploy = this.removeEmploy.bind(this);
 	}
+
+	addEmploy() {
+		console.log("aa");
+	}
+
+	saveEmploy() {
+		this.employArray.push(this.state.employ);
+	}
+
+	removeEmploy() {
+		console.log("removed");
+	}
+
 	render() {
 		return (
 			<div>
@@ -22,8 +39,16 @@ class Experience extends Component {
 					<i className="fas fa-briefcase"> Experience</i>
 				</h3>
 				<ul id="employList">
-					<Employ employArray={this.state.employArray}></Employ>
+					<Employ
+						employArray={this.state.employArray}
+						saveEmploy={this.saveEmploy}
+						removeEmploy={this.removeEmploy}
+						addingEmploy={this.state.addingEmploy}
+					></Employ>
 				</ul>
+				<button onClick={this.addEmploy}>
+					<i className="fas fa-plus"></i>
+				</button>
 			</div>
 		);
 	}
