@@ -21,15 +21,38 @@ class Experience extends Component {
 	}
 
 	addEmploy() {
-		console.log("aa");
+		this.setState({
+			addingEmploy: true,
+		});
 	}
 
 	saveEmploy() {
-		this.employArray.push(this.state.employ);
+		this.setState(
+			{
+				employArray: [...this.state.employArray, this.state.employ],
+			},
+
+			() => {
+				this.clearEmploy();
+			}
+		);
 	}
 
 	removeEmploy() {
 		console.log("removed");
+	}
+
+	clearEmploy() {
+		this.setState({
+			employ: {
+				company: "",
+				position: "",
+				year_start: "",
+				year_end: "",
+				description: "",
+			},
+			addingEmploy: false,
+		});
 	}
 
 	render() {
