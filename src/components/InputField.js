@@ -34,7 +34,7 @@ export class InputFieldText extends Component {
 			);
 			icon = (
 				<i
-					className="fas fa-check"
+					className="fas fa-save"
 					style={{ pointerEvents: "none" }}
 				></i>
 			);

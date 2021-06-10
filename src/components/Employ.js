@@ -25,17 +25,18 @@ class Employ extends Component {
 				);
 			});
 		}
-		if (this.props.addingEmploy) {
+		if (this.props.creatingEmploy) {
 			return (
 				<div>
 					{employElements}
 					<EmployEducationForm
 						section={Object.keys(this.state)[0]}
+						setEmployData={this.props.setEmployData}
 						saveEmploy={this.props.saveEmploy}
 					></EmployEducationForm>
 				</div>
 			);
-		} else if (!this.props.addingEmploy) return employElements;
+		} else if (!this.props.creatingEmploy) return employElements;
 	}
 }
 

@@ -12,17 +12,26 @@ class Experience extends Component {
 				year_end: "",
 				description: "",
 			},
-			addingEmploy: true,
+			creatingEmploy: true,
 			employArray: [],
 		};
 		this.addEmploy = this.addEmploy.bind(this);
+		this.setEmployData = this.setEmployData.bind(this);
 		this.saveEmploy = this.saveEmploy.bind(this);
 		this.removeEmploy = this.removeEmploy.bind(this);
 	}
 
 	addEmploy() {
 		this.setState({
-			addingEmploy: true,
+			creatingEmploy: true,
+		});
+	}
+
+	setEmployData(e) {
+		const userInput = e.target.value;
+		const prop = e.target.id;
+		this.setState({
+			employ: { ...this.state.employ, [prop]: userInput },
 		});
 	}
 
@@ -30,6 +39,7 @@ class Experience extends Component {
 		this.setState(
 			{
 				employArray: [...this.state.employArray, this.state.employ],
+				creatingEmploy: false,
 			},
 
 			() => {
@@ -51,7 +61,7 @@ class Experience extends Component {
 				year_end: "",
 				description: "",
 			},
-			addingEmploy: false,
+			creatingEmploy: false,
 		});
 	}
 
@@ -66,12 +76,15 @@ class Experience extends Component {
 						employArray={this.state.employArray}
 						saveEmploy={this.saveEmploy}
 						removeEmploy={this.removeEmploy}
-						addingEmploy={this.state.addingEmploy}
+						creatingEmploy={this.state.creatingEmploy}
+						setEmployData={this.setEmployData}
 					></Employ>
 				</ul>
-				<button onClick={this.addEmploy}>
-					<i className="fas fa-plus"></i>
-				</button>
+				{this.state.creatingEmploy === false && (
+					<button onClick={this.addEmploy}>
+						<i className="fas fa-plus"></i>
+					</button>
+				)}
 			</div>
 		);
 	}
