@@ -1,3 +1,8 @@
 # CV Builder
 
-App under construction using React
+App built with React
+
+Remaining:
+Merging Education.js and Experience.js state and methods > App component
+Form validation
+CSS
