@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Employ from "./Employ";
+import EmployList from "./EmployList";
 
 class Experience extends Component {
 	constructor(props) {
@@ -39,7 +39,6 @@ class Experience extends Component {
 		this.setState(
 			{
 				employArray: [...this.state.employArray, this.state.employ],
-				creatingEmploy: false,
 			},
 
 			() => {
@@ -48,8 +47,18 @@ class Experience extends Component {
 		);
 	}
 
-	removeEmploy() {
-		console.log("removed");
+	removeEmploy(e) {
+		const toRemove = e.target.parentNode.id;
+
+		if (this.state.employArray.length === 1) {
+			this.setState({ creatingEmploy: true });
+		}
+
+		this.setState({
+			employArray: this.state.employArray.filter(
+				(element, index) => index !== toRemove
+			),
+		});
 	}
 
 	clearEmploy() {
@@ -72,13 +81,14 @@ class Experience extends Component {
 					<i className="fas fa-briefcase"> Experience</i>
 				</h3>
 				<ul id="employList">
-					<Employ
+					<EmployList
 						employArray={this.state.employArray}
 						saveEmploy={this.saveEmploy}
 						removeEmploy={this.removeEmploy}
 						creatingEmploy={this.state.creatingEmploy}
 						setEmployData={this.setEmployData}
-					></Employ>
+						section={Object.keys(this.state)[0]}
+					></EmployList>
 				</ul>
 				{this.state.creatingEmploy === false && (
 					<button onClick={this.addEmploy}>
