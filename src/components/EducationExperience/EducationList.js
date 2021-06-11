@@ -14,12 +14,12 @@ class EducationList extends Component {
 						<div key={index} id={index}>
 							<li>
 								<h4 id="educationTitle">
-									{element.title}, {element.institution}
+									{element.title_}, {element.institution}
 								</h4>
 								<div id="yearsEducation">
-									{element.year_start} to {element.year_end}
+									{element.year__start} to {element.year__end}
 								</div>
-								<p>{element.description}</p>
+								<p>{element.description_}</p>
 							</li>
 							<button
 								type="button"

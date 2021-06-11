@@ -1,7 +1,7 @@
 import React from "react";
-import Education from "./components/Education";
-import Experience from "./components/Experience";
-import General from "./components/General";
+import Education from "./components/EducationExperience/Education";
+import Experience from "./components/EducationExperience/Experience";
+import General from "./components/General/General";
 
 function App() {
 	return (

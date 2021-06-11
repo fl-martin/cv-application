@@ -29,10 +29,10 @@ class EmployEducationForm extends Component {
 						id="institution"
 						placeholder="Institution..."
 					></input>
-					<input id="title" placeholder="Title..."></input>
-					From: <input id="year_start" type="month"></input>
-					To: <input id="year_end" type="month"></input>
-					<input id="description" placeholder="Comments..."></input>
+					<input id="title_" placeholder="Title..."></input>
+					From: <input id="year__start" type="month"></input>
+					To: <input id="year__end" type="month"></input>
+					<input id="description_" placeholder="Comments..."></input>
 					<button type="button" onClick={this.props.saveEducation}>
 						<i
 							className="fas fa-save"

@@ -7,10 +7,10 @@ class Education extends Component {
 		this.state = {
 			education: {
 				institution: "",
-				title: "",
-				year_start: "",
-				year_end: "",
-				description: "",
+				title_: "",
+				year__start: "",
+				year__end: "",
+				description_: "",
 			},
 			creatingEducation: true,
 			educationArray: [],
