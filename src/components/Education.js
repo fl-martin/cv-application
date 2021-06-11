@@ -60,7 +60,7 @@ class Education extends Component {
 
 		this.setState({
 			educationArray: this.state.educationArray.filter(
-				(element, index) => index !== toRemove
+				(element, index) => index != toRemove
 			),
 		});
 	}

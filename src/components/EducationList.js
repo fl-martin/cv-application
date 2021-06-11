@@ -36,8 +36,8 @@ class EducationList extends Component {
 					{educationElements}
 					<EmployEducationForm
 						section={this.props.section}
-						setEmployData={this.props.setEducationData}
-						saveEmploy={this.props.saveEducation}
+						setEducationData={this.props.setEducationData}
+						saveEducation={this.props.saveEducation}
 					></EmployEducationForm>
 				</div>
 			);

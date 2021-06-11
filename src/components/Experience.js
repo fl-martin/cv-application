@@ -49,16 +49,18 @@ class Experience extends Component {
 
 	removeEmploy(e) {
 		const toRemove = e.target.parentNode.id;
-
 		if (this.state.employArray.length === 1) {
 			this.setState({ creatingEmploy: true });
 		}
 
-		this.setState({
-			employArray: this.state.employArray.filter(
-				(element, index) => index !== toRemove
-			),
-		});
+		this.setState(
+			{
+				employArray: this.state.employArray.filter(
+					(element, index) => index != toRemove
+				),
+			},
+			() => console.log(this.state.employArray)
+		);
 	}
 
 	clearEmploy() {
