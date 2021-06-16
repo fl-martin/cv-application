@@ -1,119 +1,115 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { InputFieldText } from "./InputField";
 
-class General extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: { data: "", editing: true },
-			title: { data: "", editing: true },
-			birth: { data: "", editing: true },
-			cel: { data: "", editing: true },
-			email: { data: "", editing: true },
-			country: { data: "", editing: true },
-			city: { data: "", editing: true },
-			address: { data: "", editing: true },
-			profile: { data: "", editing: true },
-		};
-		this.setInfo = this.setInfo.bind(this);
-		this.saveEditInput = this.saveEditInput.bind(this);
-	}
+function General() {
+	const [generalInfo, setGeneralInfo] = useState({
+		name: { data: "", editing: true },
+		title: { data: "", editing: true },
+		birth: { data: "", editing: true },
+		cel: { data: "", editing: true },
+		email: { data: "", editing: true },
+		country: { data: "", editing: true },
+		city: { data: "", editing: true },
+		address: { data: "", editing: true },
+		profile: { data: "", editing: true },
+	});
 
-	setInfo(e) {
+	function setInfo(e) {
 		const userInput = e.target.value;
 		const prop = e.target.id;
-		this.setState({
-			[prop]: { ...this.state[prop], data: userInput },
-		});
+		setGeneralInfo((generalInfo) => ({
+			...generalInfo,
+			[prop]: { ...generalInfo[prop], data: userInput },
+		}));
 	}
 
-	saveEditInput(e) {
+	function saveEditInput(e) {
 		const prop = e.target.parentNode.firstChild.id;
-		const editState = this.state[prop].editing;
-		this.setState({
-			[prop]: { ...this.state[prop], editing: editState ? false : true },
-		});
+		const editState = generalInfo[prop].editing;
+		setGeneralInfo((generalInfo) => ({
+			...generalInfo,
+			[prop]: { ...generalInfo[prop], editing: editState ? false : true },
+		}));
 	}
 
-	render() {
-		return (
-			<div>
-				<h1>
-					<InputFieldText
-						id="name"
-						placeholder="Your Name..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-				</h1>
-				<h2>
-					<InputFieldText
-						id="title"
-						placeholder="Rol..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-				</h2>
-				<div id="profileContainer">
-					<h3>
-						<i className="fas fa-user-circle"> Profile</i>
-					</h3>
-					<InputFieldText
-						id="profile"
-						placeholder="Introduce yourself..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-				</div>
-				<div id="detailsContainer">
-					<InputFieldText
-						type="text"
-						id="birth"
-						placeholder="Birth..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						onFocus={(e) => (e.target.type = "date")}
-						state={this.state}
-					></InputFieldText>
-					<InputFieldText
-						type="number"
-						id="cel"
-						placeholder="Celphone Number..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-					<InputFieldText
-						type="text"
-						id="country"
-						placeholder="Country..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-					<InputFieldText
-						type="text"
-						id="city"
-						placeholder="City..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-					<InputFieldText
-						type="text"
-						id="address"
-						placeholder="Address..."
-						setInfo={this.setInfo}
-						saveEditInput={this.saveEditInput}
-						state={this.state}
-					></InputFieldText>
-				</div>
+	return (
+		<div>
+			<h1>
+				<InputFieldText
+					value={generalInfo.name}
+					id="name"
+					placeholder="Your Name..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
+			</h1>
+			<h2>
+				<InputFieldText
+					id="title"
+					placeholder="Rol..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
+			</h2>
+			<div id="profileContainer">
+				<h3>
+					<i className="fas fa-user-circle"> Profile</i>
+				</h3>
+				<InputFieldText
+					id="profile"
+					placeholder="Introduce yourself..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
 			</div>
-		);
-	}
+			<div id="detailsContainer">
+				<InputFieldText
+					type="text"
+					id="birth"
+					placeholder="Birth..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					onFocus={(e) => (e.target.type = "date")}
+					state={generalInfo}
+				></InputFieldText>
+				<InputFieldText
+					type="number"
+					id="cel"
+					placeholder="Celphone Number..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
+				<InputFieldText
+					type="text"
+					id="country"
+					placeholder="Country..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
+				<InputFieldText
+					type="text"
+					id="city"
+					placeholder="City..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
+				<InputFieldText
+					type="text"
+					id="address"
+					placeholder="Address..."
+					setInfo={setInfo}
+					saveEditInput={saveEditInput}
+					state={generalInfo}
+				></InputFieldText>
+			</div>
+		</div>
+	);
 }
 
 export default General;
