@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { InputFieldText } from "./InputField";
+import React, { useState } from "react";
+import InputFieldText from "./InputField";
 
 function General() {
 	const [generalInfo, setGeneralInfo] = useState({

@@ -4,7 +4,7 @@ App built with React
 
 Remaining:
 <br>
-Merging Education.js and Experience.js state and methods > App component
+Convert class components to functional components
 <br>
 Form validation
 <br>
