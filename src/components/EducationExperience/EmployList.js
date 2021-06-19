@@ -1,47 +1,39 @@
-import React, { Component, useState, useEffect } from "react";
+import React from "react";
 import EmployEducationForm from "./EmployEducationForm";
 
-class EmployList extends Component {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		let employElements;
-		if (this.props.employArray.length > 0) {
-			employElements = this.props.employArray.map((element, index) => {
-				return (
-					<div key={index} id={index}>
-						<li>
-							<h4 id="employTitle">
-								{element.position} in {element.company}
-							</h4>
-							<div id="yearsEmploy">
-								{element.year_start} to {element.year_end}
-							</div>
-							<p>{element.description}</p>
-						</li>
-						<button
-							type="button"
-							onClick={this.props.removeEmploy}
-						></button>
-					</div>
-				);
-			});
-		}
-		if (this.props.creatingEmploy) {
+function EmployList(props) {
+	let employElements;
+	if (props.employArray.length > 0) {
+		employElements = props.employArray.map((element, index) => {
 			return (
-				<div>
-					{employElements}
-					<EmployEducationForm
-						section={this.props.section}
-						setEmployData={this.props.setEmployData}
-						saveEmploy={this.props.saveEmploy}
-						employValues={this.props.employValues}
-					></EmployEducationForm>
+				<div key={index} id={index}>
+					<li>
+						<h4 id="employTitle">
+							{element.position} in {element.company}
+						</h4>
+						<div id="yearsEmploy">
+							{element.year_start} to {element.year_end}
+						</div>
+						<p>{element.description}</p>
+					</li>
+					<button type="button" onClick={props.removeEmploy}></button>
 				</div>
 			);
-		} else if (!this.props.creatingEmploy) return employElements;
+		});
 	}
+	if (props.creatingEmploy) {
+		return (
+			<div>
+				{employElements}
+				<EmployEducationForm
+					section={props.section}
+					setEmployData={props.setEmployData}
+					saveEmploy={props.saveEmploy}
+					employValues={props.employValues}
+				></EmployEducationForm>
+			</div>
+		);
+	} else if (!props.creatingEmploy) return employElements;
 }
 
 export default EmployList;
