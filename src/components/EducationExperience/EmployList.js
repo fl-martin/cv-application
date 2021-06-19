@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import EmployEducationForm from "./EmployEducationForm";
 
 class EmployList extends Component {
@@ -36,6 +36,7 @@ class EmployList extends Component {
 						section={this.props.section}
 						setEmployData={this.props.setEmployData}
 						saveEmploy={this.props.saveEmploy}
+						employValues={this.props.employValues}
 					></EmployEducationForm>
 				</div>
 			);

@@ -8,12 +8,39 @@ class EmployEducationForm extends Component {
 	render() {
 		if (this.props.section === "employ") {
 			return (
-				<form onChange={this.props.setEmployData}>
-					<input id="company" placeholder="Company..."></input>
-					<input id="position" placeholder="Position..."></input>
-					From: <input id="year_start" type="month"></input>
-					To: <input id="year_end" type="month"></input>
-					<input id="description" placeholder="Comments..."></input>
+				<form>
+					<input
+						id="company"
+						placeholder="Company..."
+						value={this.props.employValues.company}
+						onChange={this.props.setEmployData}
+					></input>
+					<input
+						id="position"
+						placeholder="Position..."
+						value={this.props.employValues.position}
+						onChange={this.props.setEmployData}
+					></input>
+					From:{" "}
+					<input
+						id="year_start"
+						type="month"
+						value={this.props.employValues.year_start}
+						onChange={this.props.setEmployData}
+					></input>
+					To:{" "}
+					<input
+						id="year_end"
+						type="month"
+						value={this.props.employValues.year_end}
+						onChange={this.props.setEmployData}
+					></input>
+					<input
+						id="description"
+						placeholder="Comments..."
+						value={this.props.employValues.description}
+						onChange={this.props.setEmployData}
+					></input>
 					<button type="button" onClick={this.props.saveEmploy}>
 						<i
 							className="fas fa-save"

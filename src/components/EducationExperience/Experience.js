@@ -1,105 +1,82 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import EmployList from "./EmployList";
 
-class Experience extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			employ: {
-				company: "",
-				position: "",
-				year_start: "",
-				year_end: "",
-				description: "",
-			},
-			creatingEmploy: true,
-			employArray: [],
-		};
-		this.addEmploy = this.addEmploy.bind(this);
-		this.setEmployData = this.setEmployData.bind(this);
-		this.saveEmploy = this.saveEmploy.bind(this);
-		this.removeEmploy = this.removeEmploy.bind(this);
+function Experience() {
+	const [employ, setEmploy] = useState({
+		company: "",
+		position: "",
+		year_start: "",
+		year_end: "",
+		description: "",
+	});
+
+	const [creatingEmploy, setCreatingEmploy] = useState(true);
+	const [employArray, setEmployArray] = useState([]);
+
+	function addEmploy() {
+		setCreatingEmploy(true);
 	}
 
-	addEmploy() {
-		this.setState({
-			creatingEmploy: true,
-		});
-	}
-
-	setEmployData(e) {
+	function setEmployData(e) {
 		const userInput = e.target.value;
 		const prop = e.target.id;
-		this.setState({
-			employ: { ...this.state.employ, [prop]: userInput },
-		});
+		setEmploy({ ...employ, [prop]: userInput });
 	}
 
-	saveEmploy() {
-		this.setState(
-			{
-				employArray: [...this.state.employArray, this.state.employ],
-			},
-
-			() => {
-				this.clearEmploy();
-			}
-		);
+	function saveEmploy() {
+		setEmployArray([...employArray, employ]);
 	}
 
-	removeEmploy(e) {
+	useEffect(() => {
+		clearEmploy(); //Avoid this when removing item: comparing prevEmploy > employArray
+		if (employArray.length == 0) addEmploy();
+	}, [employArray]);
+
+	function removeEmploy(e) {
 		const toRemove = e.target.parentNode.id;
-		if (this.state.employArray.length === 1) {
-			this.setState({ creatingEmploy: true });
+		if (employArray.length === 1) {
+			setCreatingEmploy(true);
 		}
 
-		this.setState(
-			{
-				employArray: this.state.employArray.filter(
-					(element, index) => index != toRemove
-				),
-			},
-			() => console.log(this.state.employArray)
+		setEmployArray(
+			employArray.filter((element, index) => index != toRemove)
 		);
 	}
 
-	clearEmploy() {
-		this.setState({
-			employ: {
-				company: "",
-				position: "",
-				year_start: "",
-				year_end: "",
-				description: "",
-			},
-			creatingEmploy: false,
+	function clearEmploy() {
+		setEmploy({
+			company: "",
+			position: "",
+			year_start: "",
+			year_end: "",
+			description: "",
 		});
+		setCreatingEmploy(false);
 	}
 
-	render() {
-		return (
-			<div>
-				<h3>
-					<i className="fas fa-briefcase"> Experience</i>
-				</h3>
-				<ul id="employList">
-					<EmployList
-						employArray={this.state.employArray}
-						saveEmploy={this.saveEmploy}
-						removeEmploy={this.removeEmploy}
-						creatingEmploy={this.state.creatingEmploy}
-						setEmployData={this.setEmployData}
-						section={Object.keys(this.state)[0]}
-					></EmployList>
-				</ul>
-				{this.state.creatingEmploy === false && (
-					<button onClick={this.addEmploy}>
-						<i className="fas fa-plus"></i>
-					</button>
-				)}
-			</div>
-		);
-	}
+	return (
+		<div>
+			<h3>
+				<i className="fas fa-briefcase"> Experience</i>
+			</h3>
+			<ul id="employList">
+				<EmployList
+					employArray={employArray}
+					saveEmploy={saveEmploy}
+					removeEmploy={removeEmploy}
+					creatingEmploy={creatingEmploy}
+					setEmployData={setEmployData}
+					section="employ"
+					employValues={employ}
+				></EmployList>
+			</ul>
+			{creatingEmploy === false && (
+				<button onClick={addEmploy}>
+					<i className="fas fa-plus"></i>
+				</button>
+			)}
+		</div>
+	);
 }
 
 export default Experience;
