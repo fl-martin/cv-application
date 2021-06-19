@@ -1,48 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import EmployEducationForm from "./EmployEducationForm";
 
-class EducationList extends Component {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		let educationElements;
-		if (this.props.educationArray.length > 0) {
-			educationElements = this.props.educationArray.map(
-				(element, index) => {
-					return (
-						<div key={index} id={index}>
-							<li>
-								<h4 id="educationTitle">
-									{element.title_}, {element.institution}
-								</h4>
-								<div id="yearsEducation">
-									{element.year__start} to {element.year__end}
-								</div>
-								<p>{element.description_}</p>
-							</li>
-							<button
-								type="button"
-								onClick={this.props.removeEducation}
-							></button>
-						</div>
-					);
-				}
-			);
-		}
-		if (this.props.creatingEducation) {
+function EducationList(props) {
+	let educationElements;
+	if (props.educationArray.length > 0) {
+		educationElements = props.educationArray.map((element, index) => {
 			return (
-				<div>
-					{educationElements}
-					<EmployEducationForm
-						section={this.props.section}
-						setEducationData={this.props.setEducationData}
-						saveEducation={this.props.saveEducation}
-					></EmployEducationForm>
+				<div key={index} id={index}>
+					<li>
+						<h4 id="educationTitle">
+							{element.title_}, {element.institution}
+						</h4>
+						<div id="yearsEducation">
+							{element.year__start} to {element.year__end}
+						</div>
+						<p>{element.description_}</p>
+					</li>
+					<button
+						type="button"
+						onClick={props.removeEducation}
+					></button>
 				</div>
 			);
-		} else if (!this.props.creatingEducation) return educationElements;
+		});
 	}
+	if (props.creatingEducation) {
+		return (
+			<div>
+				{educationElements}
+				<EmployEducationForm
+					section={props.section}
+					setEducationData={props.setEducationData}
+					saveEducation={props.saveEducation}
+					educationValues={props.educationValues}
+				></EmployEducationForm>
+			</div>
+		);
+	} else if (!props.creatingEducation) return educationElements;
 }
 
 export default EducationList;

@@ -1,107 +1,86 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import EducationList from "./EducationList";
 
-class Education extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			education: {
-				institution: "",
-				title_: "",
-				year__start: "",
-				year__end: "",
-				description_: "",
-			},
-			creatingEducation: true,
-			educationArray: [],
-			skills: [],
-		};
-		this.addEducation = this.addEducation.bind(this);
-		this.setEducationData = this.setEducationData.bind(this);
-		this.saveEducation = this.saveEducation.bind(this);
-		this.removeEducation = this.removeEducation.bind(this);
-	}
+function Education() {
+	const [education, setEducation] = useState({
+		institution: "",
+		title_: "",
+		year__start: "",
+		year__end: "",
+		description_: "",
+	});
 
-	addEducation() {
-		this.setState({
+	const [creatingEducation, setCreatingEducation] = useState(true);
+	const [educationArray, setEducationArray] = useState([]);
+
+	//create skills set
+
+	function addEducation() {
+		setCreatingEducation({
 			creatingEducation: true,
 		});
 	}
 
-	setEducationData(e) {
+	function setEducationData(e) {
 		const userInput = e.target.value;
 		const prop = e.target.id;
-		this.setState({
-			education: { ...this.state.education, [prop]: userInput },
-		});
+		setEducation({ ...education, [prop]: userInput });
 	}
 
-	saveEducation() {
-		this.setState(
-			{
-				educationArray: [
-					...this.state.educationArray,
-					this.state.education,
-				],
-			},
-
-			() => {
-				this.clearEducation();
-			}
-		);
+	function saveEducation() {
+		setEducationArray([...educationArray, education]);
 	}
 
-	removeEducation(e) {
+	useEffect(() => {
+		clearEducation();
+		if (educationArray == 0) addEducation();
+	}, [educationArray]);
+
+	function removeEducation(e) {
 		const toRemove = e.target.parentNode.id;
-
-		if (this.state.educationArray.length === 1) {
-			this.setState({ creatingEducation: true });
+		if (educationArray.length === 1) {
+			setCreatingEducation(true);
 		}
 
-		this.setState({
-			educationArray: this.state.educationArray.filter(
-				(element, index) => index != toRemove
-			),
-		});
-	}
-
-	clearEducation() {
-		this.setState({
-			education: {
-				institution: "",
-				title: "",
-				year_start: "",
-				year_end: "",
-				description: "",
-			},
-			creatingEducation: false,
-		});
-	}
-
-	render() {
-		return (
-			<div>
-				<h3>
-					<i className="fas fa-pen-square"> Education</i>
-				</h3>
-				<ul id="educationList">
-					<EducationList
-						educationArray={this.state.educationArray}
-						saveEducation={this.saveEducation}
-						removeEducation={this.removeEducation}
-						creatingEducation={this.state.creatingEducation}
-						setEducationData={this.setEducationData}
-						section={Object.keys(this.state)[0]}
-					></EducationList>
-				</ul>
-				{this.state.creatingEducation === false && (
-					<button onClick={this.addEducation}>
-						<i className="fas fa-plus"></i>
-					</button>
-				)}
-			</div>
+		setEducationArray(
+			educationArray.filter((element, index) => index != toRemove)
 		);
 	}
+
+	function clearEducation() {
+		setEducation({
+			institution: "",
+			title: "",
+			year_start: "",
+			year_end: "",
+			description: "",
+		});
+		setCreatingEducation(false);
+	}
+
+	return (
+		<div>
+			<h3>
+				<i className="fas fa-pen-square"> Education</i>
+			</h3>
+			<ul id="educationList">
+				<EducationList
+					educationArray={educationArray}
+					saveEducation={saveEducation}
+					removeEducation={removeEducation}
+					creatingEducation={creatingEducation}
+					setEducationData={setEducationData}
+					section="education"
+					educationValues={education}
+				></EducationList>
+			</ul>
+			{creatingEducation === false && (
+				<button onClick={addEducation}>
+					<i className="fas fa-plus"></i>
+				</button>
+			)}
+		</div>
+	);
 }
 
 export default Education;
